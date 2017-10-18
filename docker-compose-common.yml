@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  # OS関連
+  operationSystem:
+    build: ./container/base
+    image: operationSystem
+
+  # Web関連
+  web:
+    build: ./container/web/apache-php
+    image: web
+    volumes:
+      - ./application:/usr/src/application
+      - ./documentRoot:/var/www/html
+    environment:
+      TZ: JST-9

@@ -1,0 +1,40 @@
+version: '2'
+
+services:
+  # Application
+  app:
+    extends:
+      file: docker-compose-common.yml
+      service: web
+    container_name: app
+    ports:
+      - 80:80
+    working_dir: /var/www/html
+    depends_on:
+      - db
+
+  # DB
+  db:
+#    build: ./container/db/mysql
+    image: mysql:5.7
+    container_name: db
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./container/db/mysql/volumes/mysql:/var/lib/mysql
+    ports:
+      - 127.0.0.1:3306:3306
+    environment:
+      MYSQL_USER:                 root
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_DATABASE:             test
+      TZ: JST-9
+
+  # DNS
+  dnsmasq:
+    image: yousan/dnsmasq
+    container_name: dnsmasq
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+    cap_add:
+      - NET_ADMIN

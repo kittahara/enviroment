@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e # fail on any error
+
+APP_NAME="app"
+
+case "$1" in
+  "login" )
+    eval "docker-compose exec ${@:2} /bin/bash"
+    ;;
+esac
