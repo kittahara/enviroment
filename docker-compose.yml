@@ -22,12 +22,24 @@ services:
     volumes:
       - ./container/db/mysql/volumes/mysql:/var/lib/mysql
     ports:
-      - 127.0.0.1:3306:3306
+      - 3306:3306
     environment:
-      MYSQL_USER:                 root
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-      MYSQL_DATABASE:             test
+      MYSQL_USER:          root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE:      test
+      MYSQL_PASSWORD:      password
       TZ: JST-9
+
+  # phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    links:
+      - db
+    ports:
+       - 8080:80
+    volumes:
+       - ./container/phpmyadmin/sessions:/sessions
 
   # DNS
   dnsmasq:
