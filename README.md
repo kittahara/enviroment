@@ -30,9 +30,9 @@ https://qiita.com/yousan/items/f05fa03c1f3951971f2f
 - ログイン 
 $ docker exec -it app bash
 - simbolic link
-$ ln -snf /usr/src/application/laravel/MyFirstLaravel/public laravel5
+$ ln -snf /usr/src/application/laravel/MyFirstLaravel/public /var/www/html/laravel5
 ```
-
+3. http://localhost/laravel5 にアクセス
 
 ## 使い方
 1. BASEコンテナのセットアップ (以下を参考に)
