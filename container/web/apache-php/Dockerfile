@@ -25,10 +25,15 @@ RUN chkconfig httpd on
 # ===== PHPのセットアップ (7.0.24) =====
 RUN yum -y install --enablerepo=epel libwebp
 RUN yum -y install --enablerepo=remi gd-last
-RUN yum -y install --enablerepo=remi-php70,remi php php-devel php-mbstring php-mysql php-pdo php-common php-gd
+RUN yum -y install --enablerepo=remi-php70,remi php php-devel php-mbstring php-mysql php-pdo php-common php-gd php-xml
 
 # 設定ファイルを上書き
 COPY config/php.ini /etc/php.ini
+
+# ===== Composerのセットアップ (1.5.2) =====
+RUN curl -sS https://getcomposer.org/installer | php
+RUN mv composer.phar /usr/local/bin/composer
+# RUN composer update
 
 # コンテナ内のポート番号
 EXPOSE 80
