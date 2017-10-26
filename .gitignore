@@ -21,3 +21,5 @@ gen### Example user template template
 *.iml
 out
 gen
+
+/application/*
