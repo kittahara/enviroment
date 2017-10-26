@@ -21,6 +21,17 @@ https://qiita.com/yousan/items/f05fa03c1f3951971f2f
 - windows考慮
 - manage scriptの考慮追加 ガシガシ
 - 開発howto 記載
+- READMEの精査
+
+## アプリケーションのセットアップ
+1. /application 配下にapplicationを丸ごと配置
+2. (appコンテナ内) DocumentRootからappplicationにsimboliclink
+```
+- ログイン 
+$ docker exec -it app bash
+- simbolic link
+$ ln -snf /usr/src/application/laravel/MyFirstLaravel/public laravel5
+```
 
 
 ## 使い方
@@ -28,6 +39,11 @@ https://qiita.com/yousan/items/f05fa03c1f3951971f2f
 2. docker-compose build
 3. docker-compose up
 4. http://localhost/ にアクセス。
+
+|||
+|:--|:--|
+|WEB|http://localhost|
+|phpmyadmin|http://localhost:8080|
 
 ## <事前準備> baseコンテナに関して **＊初回だけ**
 参考記事 : https://stackoverflow.com/questions/20481225/how-can-i-use-a-local-image-as-the-base-image-with-a-dockerfile  
