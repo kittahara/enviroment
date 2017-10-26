@@ -17,12 +17,10 @@ https://qiita.com/gologo13/items/7e4e404af80377b48fd5
 https://qiita.com/yousan/items/f05fa03c1f3951971f2f
 
 - application/へのソースGit clone
-- DNSコンテナの活用
 - composer, npm, FTP, redis, storageのコンテナ追加
 - windows考慮
 - manage scriptの考慮追加 ガシガシ
 - 開発howto 記載
-- GUIクライアントでの接続例
 
 
 ## 使い方
