@@ -23,7 +23,7 @@ case "$1" in
   "command" )
     APP_NAME=${@:2}
     echo "----------------------------"
-    echo "実行コマンドを入力してください"
+    echo "[$APP_NAME] 実行コマンドを入力してください"
     read input
     eval "docker-compose exec $APP_NAME $input"
     ;;
