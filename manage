@@ -3,9 +3,34 @@
 set -e # fail on any error
 
 APP_NAME="app"
+# TODO: 各環境のアプリケーションパス
+APP_PATH="/usr/src/application/sandbox/laravel"
+
 
 case "$1" in
+  "up" )
+    eval "docker-compose up"
+    ;;
+  "build" )
+    eval "docker-compose build"
+    ;;
+  "restart" )
+    eval "docker-compose restart"
+    ;;
   "login" )
     eval "docker-compose exec ${@:2} /bin/bash"
+    ;;
+  "command" )
+    APP_NAME=${@:2}
+    echo "----------------------------"
+    echo "実行コマンドを入力してください"
+    read input
+    eval "docker-compose exec $APP_NAME $input"
+    ;;
+  "artisan" )
+    eval "docker-compose exec app php $APP_PATH/artisan ${@:2}"
+    ;;
+  "log" )
+    eval "docker-compose exec app tail -f $APP_PATH/storage/logs/laravel.log"
     ;;
 esac
