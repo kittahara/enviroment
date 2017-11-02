@@ -16,6 +16,8 @@ COPY epel.repo /etc/yum.repos.d/
 RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm && yum clean all
 COPY remi.repo /etc/yum.repos.d/
 
+RUN rpm --rebuilddb; yum install -y yum-plugin-ovl
+
 # set locale
 RUN yum reinstall -y glibc-common && yum clean all
 RUN localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
