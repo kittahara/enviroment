@@ -3,25 +3,26 @@
 `$ ./manage login (app または db)`
 - コンテナ間のファイル転送  
 https://qiita.com/gologo13/items/7e4e404af80377b48fd5
-
-
-## MountedVolumes
-|名称|host|client|
-|:--|:--|:--|
-|DocumentRoot|app:/var/www/html|/general_enviroment/documentRoot|
-|application|app:/var/src/app|/general_enviroment/application|
-
+- Windowsでの動作に関して  
+https://docs.docker.com/docker-for-windows/install/  
+https://docs.microsoft.com/ja-jp/virtualization/hyper-v-on-windows/reference/hyper-v-requirements  
+http://www.vwnet.jp/Windows/w10/Hyper-V/Enablew10Hyper-V.htm  
+所有しているWindowsPCにdokcer for windowsをセットし確認したところ、  
+OSがWindows10HomeEditionだったためかMicrosoftHyper-Vを有効化できなかった。  
+このため未だWindowsでの動作検証はできていない状況。
 
 ## TODO
 - 参考元記事の記載  
 https://qiita.com/yousan/items/f05fa03c1f3951971f2f
 
-- composer, npm, FTP, redis, storageのコンテナ追加
-- windows考慮
-- 開発howto 記載
-- READMEの精査
 
-## アプリケーションのセットアップ
+## MountedVolumes
+|名称|host|client|
+|:--|:--|:--|
+|DocumentRoot|app:/var/www/html|/enviroment/documentRoot|
+|application|app:/var/src/app|/enviroment/application|
+
+## Application setup
 1. /application 配下にapplicationを丸ごと配置
 2. (appコンテナ内) DocumentRootからappplicationにsimboliclink
 ```
@@ -32,12 +33,13 @@ $ ln -snf /usr/src/application/laravel/MyFirstLaravel/public /var/www/html/larav
 ```
 3. http://localhost/laravel5 にアクセス
 
-## 使い方
+## how to use
 1. BASEコンテナのセットアップ (以下を参考に)
 2. docker-compose build
 3. docker-compose up
 4. http://localhost/ にアクセス。
 
+#### アクセスURL
 |||
 |:--|:--|
 |WEB|http://localhost|
@@ -54,7 +56,7 @@ web.db等のコンテナはcentOSベースのコンテナ(以降BC)を元に生�
 #### 手順
 1. BCをビルド 
 ```
-$ cd general_enviroment/container/base
+$ cd enviroment/container/base
 $ docker build .
 Successfully built 0e9c7c83bb9a
 ```
@@ -74,3 +76,4 @@ $ docker tag 0e9c7c83bb9a ktahara-base
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 ktahara-base        latest              0e9c7c83bb9a        9 minutes ago       1.03GB
 ```
+
