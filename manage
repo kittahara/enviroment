@@ -33,4 +33,13 @@ case "$1" in
   "log" )
     eval "docker-compose exec app tail -f $APP_PATH/storage/logs/laravel.log"
     ;;
+  "npm-install" )
+    eval "docker-compose exec app npm install --no-bin-links --no-optional --prefix $APP_PATH"
+    ;;
+  "npm-run-dev" )
+    eval "docker-compose exec app npm run dev --prefix $APP_PATH"
+    ;;
+  "npm-watch" )
+    eval "docker-compose exec app npm run watch --prefix $APP_PATH"
+    ;;
 esac

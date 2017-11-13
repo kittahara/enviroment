@@ -35,6 +35,10 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 # RUN composer update
 
+# ===== node,npmのセットアップ (node:v6.12.0,npm:3.10.10) =====
+RUN curl -sL https://rpm.nodesource.com/setup_6.x | bash - && yum -y install nodejs
+RUN npm install -g cross-env
+
 # コンテナ内のポート番号
 EXPOSE 80
 
