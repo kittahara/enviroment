@@ -15,7 +15,7 @@ RUN yum install -y httpd
 # 設定ファイルを上書き
 COPY config/httpd.conf /etc/httpd/conf/httpd.conf
 # vhostファイルを配置 :TODO 要確認
-# COPY config/vhost.conf /etc/httpd/conf.d/vhost.conf
+COPY config/vhost.conf /etc/httpd/conf.d/vhost.conf
 
 # 起動 && 自動起動設定ON
 RUN /etc/init.d/httpd start
