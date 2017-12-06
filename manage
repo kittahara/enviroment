@@ -30,8 +30,14 @@ case "$1" in
   "artisan" )
     eval "docker-compose exec app php $APP_PATH/artisan ${@:2}"
     ;;
+  "tinker")
+    eval "docker-compose exec app php $APP_PATH/artisan tinker"
+    ;;
   "log" )
     eval "docker-compose exec app tail -f $APP_PATH/storage/logs/laravel.log"
+    ;;
+  "composer")
+    eval "docker-compose exec app /bin/bash -c 'cd $APP_PATH && composer ${@:2}'"
     ;;
   "npm-install" )
     eval "docker-compose exec app npm install --no-bin-links --no-optional --prefix $APP_PATH"
@@ -39,7 +45,10 @@ case "$1" in
   "npm-run-dev" )
     eval "docker-compose exec app npm run dev --prefix $APP_PATH"
     ;;
-  "npm-watch" )
+  "npm-run-watch" )
     eval "docker-compose exec app npm run watch --prefix $APP_PATH"
+    ;;
+  "test")
+    eval "docker-compose exec app /bin/bash -c 'cd $APP_PATH && php artisan dusk'"
     ;;
 esac
